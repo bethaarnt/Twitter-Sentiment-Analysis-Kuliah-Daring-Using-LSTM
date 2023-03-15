@@ -5,3 +5,7 @@ Proses analisis sentimen dilakukan dengan pendekatan lexicon-based menggunakan I
 ## Dataset :
 
 [Dataset tweet twitter dengan keyword "kuliah daring" link](https://github.com/Skainomi/ProjectDataScience/tree/master/data)
+
+## Link Deploy :
+
+https://project-metopen-k7-l2.streamlit.app/
