@@ -3,19 +3,15 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import numpy as np
-seed = 0
-np.random.seed(seed)
-import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set(style = 'whitegrid')
 import re
 import string
 import json
-from PIL import Image
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-from keras.preprocessing.text import Tokenizer, tokenizer_from_json
+from keras.preprocessing.text import tokenizer_from_json
 from keras.utils import pad_sequences
 from keras.models import Model, load_model
 
