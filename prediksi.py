@@ -20,7 +20,7 @@ from keras.models import load_model
 
 #load dataset
 tweets_data = pd.read_csv('dataset_clean_sentiment.csv')
-tweets = tweets_data[['id', 'username', 'created_at', 'tweet', 'text_clean', 'text_preprocessed', 'sentiment_score', 'sentiment']]
+# tweets = tweets_data[['id', 'username', 'created_at', 'tweet', 'text_clean', 'text_preprocessed', 'sentiment_score', 'sentiment']]
 
 def cleaningText(text):
     text = re.sub(r'@[A-Za-z0-9]+', '', text) 

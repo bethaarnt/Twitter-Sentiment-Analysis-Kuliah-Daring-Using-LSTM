@@ -80,15 +80,12 @@ sentiment_encode = {'negative' : 0, 'neutral' : 1, 'positive' : 2}
 y = tweets_data['sentiment'].map(sentiment_encode).values
 
 # select
-select = st.selectbox('Pilih Skenario ', ['Explore Visualisasi Data','Skenario Baseline', 'Skenario Modifikasi'], key=1)
+select = st.selectbox('Pilih Skenario ', ['Explore Visualisasi Data','Prediksi'], key=1)
 polarity = tweets_data['sentiment'].value_counts()
 polarity = pd.DataFrame({'polarity': polarity.index, 'Tweets': polarity.values})
 
 def modelPrediction(text):
-    if(select == 'Skenario Baseline'):
-        model = load_model('model_baseline.h5')
-    else:
-        model = load_model('model_modifikasi.h5')
+    model = load_model('model.h5')
         
     if st.button('Hasil Predict Sentiment 👈'):
         text = [input_text]
@@ -126,32 +123,10 @@ if select == 'Explore Visualisasi Data':
     st.header('Positive and Negative Word Cloud')
     st.image('img/wordcloud.png')
     st.write('WordCloud di atas merupakan representasi visual dari kumpulan kata-kata positive dan negative yang disusun secara acak dalam ukuran dan bentuk yang berbeda, di mana kata-kata yang paling sering muncul akan lebih besar dan lebih menonjol daripada kata-kata yang jarang muncul.')
-    
-# choose baseline
-elif select == 'Skenario Baseline':
-    st.header("Model LSTM pada Percobaan Baseline")
-    st.header('Prediction with custom text ')
-    input_text = st.text_area('Masukkan Teks :')
-    text_result = ''
-    modelPrediction(input_text)
-    
-    st.subheader('Hyperparameter yang digunakan :')
-    df = pd.DataFrame({
-        'Hyperparameter': ['batch_size', 'dropout_rate','embedding_size', 'optimizer', 'learning_rate', 'activation', 'hidden_unit', 'epoch'],
-        'Value': [128, 0.2, 32, 'RMSprop', 0.001, 'tanh', 16, 10],
-    })
-    st.table(df)
-    
-    st.header('Grafik Akurasi 📈 ')
-    st.image('img/acc_baseline.png')
-    st.write('Hasil akurasi pada percobaan Baseline diperoleh sebesar 89,86%')
-    st.header('Confusion Matrix: ')
-    st.image('img/cf_baseline.png')
-    st.write('Dari gambar confusion matrix diatas, diketahui bahwa model dapat memprediksi 2377 sentimen negatif, 607 sentimen netral dan 1509 sentimen positif dengan benar.')
 
-# choose modifikasi
+# choose prediksi
 else:
-    st.header("Model LSTM Modifikasi")
+    st.header("Model LSTM")
     st.header('Prediction with custom text ')
     input_text = st.text_area('Masukkan Teks :')
     text_result = ''
@@ -162,10 +137,10 @@ else:
         'Value': [64, 0.1, 32, 'RMSprop', 0.001, 'tanh', 16, 8],
     })
     st.table(df)
-    
+    st.write(pd.read_csv('test_modifikasi.csv'))
     st.header('Grafik Akurasi 📈 ')
     st.image('img/acc_modifikasi.png')
-    st.write('Hasil akurasi pada percobaan Modifikasi diperoleh sebesar 90,02%')
+    st.write('Hasil akurasi pada percobaan diperoleh sebesar 90,02%')
     st.header('Confusion Matrix: ')
     st.image('img/cf_modifikasi.png')
     st.write('Dari gambar confusion matrix diatas, diketahui bahwa model dapat memprediksi 2397 sentimen negatif, 593 sentimen netral dan 1511 sentimen positif dengan benar.')
